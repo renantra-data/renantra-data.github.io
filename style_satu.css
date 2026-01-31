@@ -8,66 +8,80 @@
 body {
   display: flex;
   height: 100vh;
-  background-color: #f6b78d;
+  background: #f6b78d;
 }
 
 /* Sidebar */
 .sidebar {
-  width: 360px;
-  background-color: #f6b78d;
+  width: 300px;
   border-right: 2px solid #000;
 }
 
 .menu {
-  background-color: #c65a11;
-  color: white;
-  padding: 8px 12px;
+  background: #c65a11;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.menu nav a {
+.dot {
+  color: white;
+  font-size: 22px;
+}
+
+nav a {
   color: white;
   text-decoration: none;
   font-size: 12px;
-  margin-left: 10px;
+  margin-left: 12px;
+  opacity: 0.6;
 }
 
-.dot {
-  font-size: 20px;
+nav a.active,
+nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
-.section {
-  padding: 18px;
-  min-height: 80px;
+/* Content */
+.content {
+  flex: 1;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
 }
 
-.section h2 {
-  font-size: 14px;
+/* Pages */
+.page {
+  position: absolute;
+  inset: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s ease;
+  pointer-events: none;
 }
 
-.project-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.page.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
+h1 {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+/* Project */
 .project {
   display: flex;
-  gap: 10px;
-  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .thumb {
-  width: 80px;
-  height: 40px;
+  width: 90px;
+  height: 45px;
   border: 1px solid #000;
-  background-color: #f6b78d;
-}
-
-/* Main content */
-.content {
-  flex: 1;
-  background-color: #f6b78d;
 }

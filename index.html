@@ -2,41 +2,36 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio Rendi</title>
-  <link rel="stylesheet" href="style_satu.css">
-
-
-
-
-
-
-  
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="menu">
       <span class="dot">•</span>
       <nav>
-        <a href="#project">PROJECT</a>
-        <a href="#about">ABOUT</a>
+        <a href="#" data-page="home" class="active">HOME</a>
+        <a href="#" data-page="project">PROJECT</a>
+        <a href="#" data-page="about">ABOUT</a>
       </nav>
     </div>
+  </aside>
 
-    <section class="section">
-      <h2>HALO</h2>
+  <main class="content">
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <h1>HALO</h1>
+      <p>
+        Ini adalah portfolio sederhana.<br>
+        Seperti dunia yang bisa kita dekati, tapi tidak sepenuhnya kita kuasai.
+      </p>
     </section>
 
-    <div class="menu">
-      <span class="dot">•</span>
-      <nav>
-        <a href="#project">PROJECT</a>
-        <a href="#about">ABOUT</a>
-      </nav>
-    </div>
+    <!-- PROJECT -->
+    <section id="project" class="page">
+      <h1>PROJECT</h1>
 
-    <section class="section project-list" id="project">
       <div class="project">
         <div class="thumb"></div>
         <div>
@@ -54,24 +49,17 @@
       </div>
     </section>
 
-    <div class="menu">
-      <span class="dot">•</span>
-      <nav>
-        <a href="#project">PROJECT</a>
-        <a href="#about">ABOUT</a>
-      </nav>
-    </div>
-
-    <section class="section" id="about">
-      <p>Website portfolio sederhana berbasis data & analisis.</p>
+    <!-- ABOUT -->
+    <section id="about" class="page">
+      <h1>ABOUT</h1>
+      <p>
+        Website ini dibuat sebagai ruang eksplorasi data, statistik,
+        dan ketidakteraturan dunia.<br><br>
+        Minimal. Sunyi. Tidak semua hal harus jelas.
+      </p>
     </section>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="content">
-    <!-- kosong sesuai desain excel -->
   </main>
 
-  <script src="script_satu.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
