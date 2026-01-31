@@ -1,22 +1,12 @@
-const links = document.querySelectorAll("nav a");
-const pages = document.querySelectorAll(".page");
+function showPage(id) {
+  // sembunyikan semua
+  document.getElementById("home").style.display = "none";
+  document.getElementById("project").style.display = "none";
+  document.getElementById("about").style.display = "none";
 
-links.forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
+  // tampilkan yang dipilih
+  document.getElementById(id).style.display = "block";
+}
 
-    const target = link.dataset.page;
-
-    // menu active
-    links.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-
-    // page switch
-    pages.forEach(page => {
-      page.classList.remove("active");
-      if (page.id === target) {
-        page.classList.add("active");
-      }
-    });
-  });
-});
+// tampilkan halaman awal
+showPage("home");

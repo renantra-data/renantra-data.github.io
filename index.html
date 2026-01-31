@@ -2,63 +2,38 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio</title>
+  <title>Website Saya</title>
   <link rel="stylesheet" href="style_satu.css">
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="menu">
-      <span class="dot">•</span>
-      <nav>
-        <a href="#" data-page="home" class="active">HOME</a>
-        <a href="#" data-page="project">PROJECT</a>
-        <a href="#" data-page="about">ABOUT</a>
-      </nav>
+  <!-- MENU -->
+  <div class="menu">
+    <button onclick="showPage('home')">HOME</button>
+    <button onclick="showPage('project')">PROJECT</button>
+    <button onclick="showPage('about')">ABOUT</button>
+  </div>
+
+  <!-- ISI -->
+  <div class="container">
+
+    <div id="home" class="page">
+      <h2>HALO</h2>
+      <p>Selamat datang di website sederhana saya.</p>
     </div>
-  </aside>
 
-  <main class="content">
-    <!-- HOME -->
-    <section id="home" class="page active">
-      <h1>HALO</h1>
-      <p>
-        Ini adalah portfolio sederhana.<br>
-        Seperti dunia yang bisa kita dekati, tapi tidak sepenuhnya kita kuasai.
-      </p>
-    </section>
+    <div id="project" class="page">
+      <h2>PROJECT</h2>
+      <p><b>Projek 1</b><br>Analisis rasio ketergantungan dengan IPM</p>
+      <p><b>Projek 2</b><br>Analisis rasio ketergantungan dengan IPM</p>
+    </div>
 
-    <!-- PROJECT -->
-    <section id="project" class="page">
-      <h1>PROJECT</h1>
+    <div id="about" class="page">
+      <h2>ABOUT</h2>
+      <p>Website ini dibuat untuk belajar dan berbagi.</p>
+    </div>
 
-      <div class="project">
-        <div class="thumb"></div>
-        <div>
-          <strong>Projek 1</strong>
-          <p>Analisis rasio ketergantungan dengan IPM</p>
-        </div>
-      </div>
-
-      <div class="project">
-        <div class="thumb"></div>
-        <div>
-          <strong>Projek 2</strong>
-          <p>Analisis rasio ketergantungan dengan IPM</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="page">
-      <h1>ABOUT</h1>
-      <p>
-        Website ini dibuat sebagai ruang eksplorasi data, statistik,
-        dan ketidakteraturan dunia.<br><br>
-        Minimal. Sunyi. Tidak semua hal harus jelas.
-      </p>
-    </section>
-  </main>
+  </div>
 
   <script src="script_satu.js"></script>
 </body>

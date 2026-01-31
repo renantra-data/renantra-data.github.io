@@ -1,87 +1,36 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Calibri, Arial, sans-serif;
-}
-
 body {
-  display: flex;
-  height: 100vh;
+  margin: 0;
+  font-family: Calibri, Arial, sans-serif;
   background: #f6b78d;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 300px;
-  border-right: 2px solid #000;
-}
-
+/* Menu atas */
 .menu {
   background: #c65a11;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 10px;
 }
 
-.dot {
+.menu button {
+  background: none;
+  border: none;
   color: white;
-  font-size: 22px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  margin-left: 12px;
-  opacity: 0.6;
-}
-
-nav a.active,
-nav a:hover {
-  opacity: 1;
+.menu button:hover {
   text-decoration: underline;
 }
 
-/* Content */
-.content {
-  flex: 1;
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
+/* Konten */
+.container {
+  padding: 20px;
 }
 
-/* Pages */
 .page {
-  position: absolute;
-  inset: 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.4s ease;
-  pointer-events: none;
+  display: none;
 }
 
-.page.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-h1 {
-  font-size: 18px;
-  margin-bottom: 14px;
-}
-
-/* Project */
-.project {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.thumb {
-  width: 90px;
-  height: 45px;
-  border: 1px solid #000;
+.page h2 {
+  margin-top: 0;
 }
