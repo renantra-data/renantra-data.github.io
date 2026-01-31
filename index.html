@@ -1,40 +1,63 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Website Saya</title>
-  <link rel="stylesheet" href="style_satu.css">
+    <meta charset="UTF-8">
+    <!-- Mengatur viewport agar halaman responsif di perangkat mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Memuat stylesheet utama -->
+    <link rel="stylesheet" href="style_satu.css">
+    <!-- Judul halaman ditampilkan di tab browser -->
+    <title>renan_github</title>
 </head>
 <body>
 
-  <!-- MENU -->
-  <div class="menu">
-    <button onclick="showPage('home')">HOME</button>
-    <button onclick="showPage('project')">PROJECT</button>
-    <button onclick="showPage('about')">ABOUT</button>
-  </div>
+    <!-- HEADER: bagian atas situs berisi logo dan navigasi -->
+    <!-- Gunakan elemen semantik <header> dan <nav> untuk aksesibilitas -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">renan_github</a>
+            <nav class="site-nav" id="site-nav">
+                <a href="#">Beranda</a>
+                <a href="#">Projek</a>
+                <a href="#">Profil</a>
+            </nav>
+            <!-- Tombol toggle untuk menu pada layar kecil. ID digunakan oleh JavaScript. -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
 
-  <!-- ISI -->
-  <div class="container">
+    
+    <main class="container main-content">
+        <section class="welcome">
+            <!-- Seksi ini berfungsi sebagai 'hero' sederhana: teks pengantar dan gambar/ilustrasi -->
+            <div class="welcome-wrapper">
+                <div class="welcome-text">
+                    <h1>Selamat Datang</h1>
+                    <p>Halo, ini adalah halaman saya</p>
+                </div>
+                <!-- gambar dibuat sebagai elemen dekoratif dengan background CSS -->
+                <div class="welcome-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
+            </div>
+        </section>
+    </main>
 
-    <div id="home" class="page">
-      <h2>HALO</h2>
-      <p>Selamat datang di website sederhana saya.</p>
-    </div>
-
-    <div id="project" class="page">
-      <h2>PROJECT</h2>
-      <p><b>Projek 1</b><br>Analisis rasio ketergantungan dengan IPM</p>
-      <p><b>Projek 2</b><br>Analisis rasio ketergantungan dengan IPM</p>
-    </div>
-
-    <div id="about" class="page">
-      <h2>ABOUT</h2>
-      <p>Website ini dibuat untuk belajar dan berbagi.</p>
-    </div>
-
-  </div>
-
-  <script src="script_satu.js"></script>
+    <!-- FOOTER: informasi legal dan link tambahan -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-content">
+                <p>&copy; 2026 renan_github. Semua hak dilindungi.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privasi</a>
+                <a href="#">Syarat</a>
+                <a href="#">Kontak</a>
+            </div>
+        </div>
+    </footer>
 </body>
+<!-- Memuat file JavaScript di akhir body supaya DOM sudah tersedia saat script berjalan -->
+<script src="script_satu.js"></script>
 </html>
+</body>
