@@ -1,0 +1,42 @@
+[
+  {
+    "id": "vektor",
+    "title": "Visualisasi Vektor",
+    "desc": "Materi vektor 2D & 3D dengan pendekatan visual interaktif.",
+    "link": "projek/vektor/index.html",
+    "image": "assets/vektor.jpg",
+    "date": "2025-12-20",
+    "tags": ["matematika", "visualisasi"],
+    "status": "published"
+  },
+  {
+    "id": "arima",
+    "title": "Time Series ARIMA",
+    "desc": "Penjelasan ARIMA dari konsep sampai implementasi.",
+    "link": "projek/arima/index.html",
+    "image": "assets/arima.jpg",
+    "date": "2025-12-28",
+    "tags": ["statistik", "time-series"],
+    "status": "published"
+  },
+  {
+    "id": "sentimen",
+    "title": "Analisis Sentimen",
+    "desc": "Klasifikasi sentimen komentar YouTube & teks.",
+    "link": "projek/sentimen/index.html",
+    "image": "assets/sentimen.jpg",
+    "date": "2026-01-05",
+    "tags": ["nlp", "machine-learning"],
+    "status": "published"
+  },
+  {
+    "id": "materi-baru",
+    "title": "Materi Baru",
+    "desc": "Penjelasan singkatnya",
+    "link": "projek/materi-baru/index.html",
+    "image": "assets/default.jpg",
+    "date": "2026-01-20",
+    "tags": ["draft"],
+    "status": "draft"
+  }
+]

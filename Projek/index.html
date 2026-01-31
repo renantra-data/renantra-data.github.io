@@ -1,1 +1,46 @@
-TES
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>renantra</title>
+    <meta name="description" content="Website portofolio pribadi dengan daftar proyek dan profil lengkap.">
+    <link rel="stylesheet" href="style_satu.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="https://renantra-data.github.io/" class="logo">ren</a>
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="https://renantra-data.github.io/Projek/">Projek</a></li>
+                    <li><a href="#profil">Profil</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-controls="mainNav" aria-expanded="false">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="projects" id="projek">
+            <h1 class="section-title">Projek</h1>
+            <div class="project-grid" id="projectGrid"></div>
+        </section>
+    </main>
+    <footer>
+      <div class="container">
+        <p>
+          © <span id="year"></span> renantra. All rights reserved ·
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="mailto:rendiandikaputrarenantragame@gmail.com">Contact</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <script src="script_satu.js"></script>
+</body>
+</html>
