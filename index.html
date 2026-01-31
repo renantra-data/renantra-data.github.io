@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saya Rendi</title>
+    <title>ordinary</title>
     <meta name="description" content="Website portofolio pribadi dengan daftar proyek dan profil lengkap.">
     <link rel="stylesheet" href="style_satu.css">
 </head>
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="#" class="logo">ren</a>
+            <a href="https://renantra-data.github.io/" class="logo">ren</a>
             <nav class="main-nav" id="mainNav" aria-label="Main navigation">
                 <ul>
                     <li><a href="https://renantra-data.github.io/Projek/">Projek</a></li>
@@ -26,14 +26,18 @@
     </main>
 
     <footer>
-        <div class="container">
-            <p>© 2026 Situs Saya. All rights reserved.</p>
-            <p>
-                <a href="https://github.com" target="_blank">GitHub</a> | 
-                <a href="mailto:rendiandikaputrarenantragame@gmail.com">Contact</a>
-            </p>
-        </div>
+      <div class="container">
+        <p>
+          © <span id="year"></span> renantra. All rights reserved ·
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="mailto:rendiandikaputrarenantragame@gmail.com">Contact</a>
+        </p>
+      </div>
     </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
     <script src="script_satu.js"></script>
 </body>
