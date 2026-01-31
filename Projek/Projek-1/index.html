@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis IPM Jawa Tengah</title>
+  <meta name="description" content="Analisis pengaruh HLS, PPK, dan Rasio Ketergantungan terhadap IPM Jawa Tengah.">
+  <link rel="stylesheet" href="style_satu.css">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="https://renantra-data.github.io/" class="logo">ren</a>
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="https://renantra-data.github.io/Projek/">Projek</a></li>
+                    <li><a href="#profil">Profil</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-controls="mainNav" aria-expanded="false">☰</button>
+        </div>
+    </header>
+
+<main class="article-container">
+
+<article class="article">
+
+  <h1 class="article-title">
+    Analisis Pengaruh Harapan Lama Sekolah, Pengeluaran Per Kapita, dan Rasio Ketergantungan terhadap IPM Kabupaten/Kota di Jawa Tengah
+  </h1>
+
+  <div class="article-meta">
+    <span>2025</span>
+  </div>
+
+  <nav class="toc">
+    <h3>Daftar Isi</h3>
+    <ul>
+      <li><a href="#pendahuluan">Pendahuluan</a></li>
+      <li><a href="#data">Deskripsi dan Sumber Data</a></li>
+      <li><a href="#eda">Exploratory Data Analysis</a></li>
+      <li><a href="#metode">Metode Analisis</a></li>
+      <li><a href="#hasil">Hasil dan Pembahasan</a></li>
+      <li><a href="#kesimpulan">Kesimpulan</a></li>
+      <li><a href="#referensi">Referensi</a></li>
+    </ul>
+  </nav>
+
+  <section id="pendahuluan">
+    <h2>Pendahuluan</h2>
+    <p>
+      Indeks Pembangunan Manusia (IPM) merupakan indikator komposit yang digunakan
+      untuk menilai keberhasilan pembangunan suatu wilayah dalam meningkatkan
+      kualitas hidup penduduknya. IPM mencakup dimensi kesehatan, pendidikan,
+      dan standar hidup layak.
+    </p>
+    <p>
+      Provinsi Jawa Tengah menunjukkan dinamika pembangunan manusia yang menarik,
+      dengan peningkatan IPM namun masih terdapat disparitas antar kabupaten/kota.
+      Oleh karena itu, analisis faktor-faktor yang memengaruhi IPM menjadi penting.
+    </p>
+  </section>
+
+  <section id="data">
+    <h2>Deskripsi dan Sumber Data</h2>
+    <p>
+      Data yang digunakan merupakan data sekunder dari Badan Pusat Statistik (BPS)
+      Provinsi Jawa Tengah tahun 2020–2021 pada tingkat kabupaten/kota.
+    </p>
+    <ul>
+      <li>IPM (Indeks Pembangunan Manusia)</li>
+      <li>HLS (Harapan Lama Sekolah)</li>
+      <li>PPK (Pengeluaran Per Kapita)</li>
+      <li>RK (Rasio Ketergantungan)</li>
+    </ul>
+  </section>
+
+  <section id="eda">
+    <h2>Exploratory Data Analysis</h2>
+    <p>
+      Hasil eksplorasi data menunjukkan adanya variasi IPM yang cukup signifikan
+      antar wilayah. IPM memiliki korelasi positif kuat dengan HLS dan PPK,
+      serta korelasi negatif dengan rasio ketergantungan.
+    </p>
+    <p>
+      Distribusi data relatif wajar dan tidak menunjukkan outlier ekstrem.
+    </p>
+  </section>
+
+  <section id="metode">
+    <h2>Metode Analisis</h2>
+    <p>
+      Metode yang digunakan adalah regresi linear berganda dengan IPM sebagai
+      variabel respon dan HLS, PPK, serta RK sebagai variabel prediktor.
+    </p>
+    <p>
+    $$
+    IPM = 31.3663 + 2.5505\left(HLS\right) + 0.0011(PPK) − 0.0861(RK)
+    $$
+    </p>
+  </section>
+
+  <section id="hasil">
+    <h2>Hasil dan Pembahasan</h2>
+    <p>
+      Hasil pemodelan menunjukkan bahwa HLS dan PPK berpengaruh positif signifikan
+      terhadap IPM, sedangkan RK berpengaruh negatif.
+    </p>
+    <p>
+      Seluruh asumsi regresi terpenuhi kecuali autokorelasi, yang kemungkinan
+      disebabkan oleh sifat data runtun waktu tahunan.
+    </p>
+  </section>
+
+  <section id="kesimpulan">
+    <h2>Kesimpulan</h2>
+    <p>
+      Peningkatan pendidikan dan kesejahteraan ekonomi berkontribusi positif
+      terhadap peningkatan IPM di Jawa Tengah. Sebaliknya, tingginya rasio
+      ketergantungan dapat menurunkan capaian IPM.
+    </p>
+  </section>
+
+  <section id="referensi">
+    <h2>Referensi</h2>
+    <ul>
+      <li>BPS Provinsi Jawa Tengah</li>
+      <li>Linear Regression Assumptions and Diagnostics using R</li>
+      <li>Studi IPM Jawa Timur & Jawa Tengah</li>
+    </ul>
+  </section>
+
+</article>
+</main>
+
+    <footer>
+      <div class="container">
+        <p>
+          © <span id="year"></span> renantra. All rights reserved ·
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="mailto:rendiandikaputrarenantradata@gmail.com">Contact</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+<script src="script_satu.js"></script>
+</body>
+</html>
