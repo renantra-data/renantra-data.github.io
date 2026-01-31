@@ -1,36 +1,101 @@
-body {
-  margin: 0;
-  font-family: Calibri, Arial, sans-serif;
-  background: #f6b78d;
+
+:root{
+	/* Sederhana: ganti hanya variabel di bawah ini untuk mengganti tema */
+	--primary: #134686; /* biru */
+	--danger:  #ED3F27; /* merah */
+	--accent:  #FEB21A; /* kuning/aksen */
+	--bg:      #FDF4E3; /* cream latar belakang */
+
+	/* Warna utilitas (biasanya tidak perlu diubah) */
+	--text: #222222;
+	--surface: #ffffff;
+	--border: #e6e9ef;
+	--muted: #666666;
+	--muted-strong: #555555;
+
+	/* kompatibilitas: beberapa aturan menggunakan nama lama --accent/--bg */
+	--accent: var(--primary);
+}
+/* Reset ringan: membuat pengukuran padding/margin lebih dapat diprediksi */
+*{box-sizing:border-box}
+html{height:100%;overflow:hidden}
+body{
+	/* Hilangkan margin default, siapkan layout flex kolom agar footer tetap di bawah */
+    margin:0;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    font-family:Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--text);
+    background:var(--bg)
 }
 
-/* Menu atas */
-.menu {
-  background: #c65a11;
-  padding: 10px;
-}
+.container{max-width:1000px;margin:0 auto;padding:0 16px}
 
-.menu button {
-  background: none;
-  border: none;
-  color: white;
-  margin-right: 10px;
-  cursor: pointer;
-}
+.site-header{background:var(--surface);border-bottom:1px solid var(--border)}
 
-.menu button:hover {
-  text-decoration: underline;
-}
+/* Header: logo + navigasi. Gunakan flex untuk distribusi ruang */
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.logo{font-weight:700;color:var(--accent);text-decoration:none;font-size:1.1rem}
+.site-nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600}
+.site-nav{display:flex;align-items:center}
 
-/* Konten */
-.container {
-  padding: 20px;
-}
+.nav-toggle{display:none;background:none;border:0;padding:8px;cursor:pointer}
+.nav-toggle .hamburger{display:block;width:22px;height:2px;background:var(--text);position:relative}
+.nav-toggle .hamburger::after,.nav-toggle .hamburger::before{content:"";position:absolute;left:0;width:22px;height:2px;background:var(--text)}
+.nav-toggle .hamburger::before{top:-7px}.nav-toggle .hamburger::after{top:7px}
 
-.page {
-  display: none;
-}
+/* Main: area konten utama. Flex digunakan untuk pusatkan isi pada layar besar */
+main{padding:28px 0;flex:1;overflow-y:auto;display:flex;align-items:center;justify-content:center}
 
-.page h2 {
-  margin-top: 0;
+/* Welcome section: intro hero sederhana dengan teks dan gambar */
+.welcome{width:100%;text-align:center}
+.welcome-wrapper{display:flex;gap:40px;align-items:center;justify-content:center;max-width:1200px;margin:0 auto}
+.welcome-text{flex:1;text-align:left}
+.welcome h1{margin-top:0;font-size:3.5rem;color:var(--accent)}
+.welcome p{color:var(--muted-strong);font-size:1.3rem;margin:16px 0 0}
+.welcome-image{width:350px;height:350px;border-radius:12px;flex-shrink:0;background-size:cover;background-position:center}
+
+/* Projects section: contoh penggunaan CSS Grid untuk tata letak kartu proyek */
+.projects-section{text-align:center}
+.projects-section h2{font-size:1.8rem;margin-bottom:24px}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.project-card{background:var(--surface);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s}
+.project-card:hover{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.project-image{width:100%;height:180px;background-size:cover;background-position:center}
+.project-card h3{margin:16px;font-size:1.1rem;color:var(--text)}
+.project-card p{margin:0 16px 16px;color:var(--muted);font-size:0.95rem;line-height:1.4}
+
+
+/* Footer: berada di bagian bawah; gunakan margin-top:auto supaya menempel bawah layar saat konten sedikit */
+.site-footer{background:var(--surface);border-top:1px solid var(--border);margin-top:auto;padding-top:16px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.footer-content p{margin:0;font-size:0.9rem;color:var(--muted-strong)}
+.footer-links{display:flex;gap:16px}
+.footer-links a{color:var(--accent);text-decoration:none;font-size:0.9rem}
+.footer-links a:hover{text-decoration:underline}
+
+/* Media queries: atur ulang layout untuk layar kecil (ponsel/tablet) */
+@media (max-width:768px){
+    	.site-header{position:sticky;top:0}
+    	.header-inner{padding:8px 0}
+    	.logo{font-size:1rem}
+    	.site-nav a{margin-left:12px;font-size:0.95rem}
+    	.nav-toggle{display:inline-flex}
+    	/* Pada mobile, navigasi disembunyikan secara default dan ditampilkan saat `.open` */
+    	.site-nav{position:absolute;top:100%;left:0;right:0;background:var(--surface);flex-direction:column;padding:12px 16px;border-top:1px solid var(--border);display:none}
+    	.site-nav a{margin:8px 0;margin-left:0}
+    	.site-nav.open{display:flex}
+
+    	main{padding:16px 0}
+    	.welcome-wrapper{flex-direction:column;gap:24px;padding:0 16px}
+    	.welcome-text{text-align:center}
+    	.welcome h1{font-size:2.2rem}
+    	.welcome p{font-size:1rem}
+    	.welcome-image{width:280px;height:280px}
+
+    	.footer-inner{flex-direction:column;gap:12px;text-align:center}
+    	.footer-links{justify-content:center}
+    	.footer-content p{font-size:0.85rem}
+    	.footer-links a{font-size:0.85rem}
 }
