@@ -7,6 +7,14 @@
   <meta name="description" content="Analisis pengaruh HLS, PPK, dan Rasio Ketergantungan terhadap IPM Jawa Tengah.">
   <link rel="stylesheet" href="style_satu.css">
 
+  <link href="../../prism/prism.css" rel="stylesheet" />
+  <!--.. untuk naik 1 folder-->
+  <!-- 
+    Note: You have to escape all < and & characters inside <code> elements (code blocks 
+    and inline snippets) with &lt; and &amp; respectively, or else the browser might 
+    interpret them as an HTML tag or entity. If you have large portions of HTML code, you 
+    can use the Unescaped Markup plugin to work around this.  
+  -->
 
   <!-- untuk formula -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -15,14 +23,7 @@
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
 
-  <link href="../prism/prism.css" rel="stylesheet" />
-  <!--.. untuk naik 1 folder-->
-  <!-- 
-    Note: You have to escape all < and & characters inside <code> elements (code blocks 
-    and inline snippets) with &lt; and &amp; respectively, or else the browser might 
-    interpret them as an HTML tag or entity. If you have large portions of HTML code, you 
-    can use the Unescaped Markup plugin to work around this.  
-  -->
+
 
 </head>
 <body>
@@ -104,7 +105,7 @@
       Berdasarkan latar belakang tersebut, penelitian ini bertujuan untuk menganalisis 
       pengaruh harapan lama sekolah, pengeluaran per kapita, dan rasio ketergantungan 
       terhadap Indeks Pembangunan Manusia di Provinsi Jawa Tengah menggunakan data 
-      kabupaten/kota tahun 2020–2021. Hasil penelitian ini diharapkan dapat memberikan 
+      kabupaten/kota tahun 2020-2021. Hasil penelitian ini diharapkan dapat memberikan 
       gambaran empiris mengenai faktor-faktor penentu IPM serta menjadi bahan pertimbangan 
       dalam perencanaan dan evaluasi kebijakan pembangunan manusia di tingkat daerah.
     </p>
@@ -130,37 +131,55 @@
   <section id="eda">
     <h2>Exploratory Data Analysis</h2>
     <h3>Deskripsi Data</h3>
-      <!-- Kode R dengan highlight dan nomor baris -->
-<pre class="line-numbers"><code class="language-r">
-# Mengecek struktur data
-str(data)
-
-# Statistik deskriptif
-describe(data)
-
-# Contoh assignment
-saya <- "tidak"
-
-# Ringkasan data
-summary(data)
-</code></pre>
-<pre><code class="language-css">
-p { color: red }s
-</code></pre>
+  <pre><code class="language-r">
+    str(data)
+  </code></pre>
+    <p>Output:</p>
+  <pre>
+          tibble [70 × 4] (S3: tbl_df/tbl/data.frame)
+    $ IPM: num [1:70] 74.1 83.6 79.4 82.6 70.5 ...
+    $ HLS: num [1:70] 12.8 15.4 14.2 14.9 12.5 ...
+    $ PPK: num [1:70] 12679 15843 12349 14911 9429 ...
+    $ RK : num [1:70] 48 40.1 39.4 38.2 51.2 ...
+  </pre>
+  <pre><code class="language-r">
+    describe(data)
+  </code></pre>
+    <p>Output:</p>
+  <pre>
+          vars  n   mean      sd      median    trimmed   mad     min     max       range   skew  kurtosis  se
+    IPM   1     70  72.68     4.41    72.10     72.16     4.16    66.11   83.60     17.49   0.91  0.25      0.53
+    HLS   2     70  12.95     0.93    12.84     12.82     0.73    11.46   15.53     4.07    1.16  1.10      0.11
+    PPK   3     70  11078.71  1756.17 10512.50  10851.29  1504.84 8461.00 15843.00  7382.00 1.04  0.53      209.90
+    RK    4     70  45.58     4.05    45.56     45.72     4.28    35.90   52.65     16.75   -0.29 -0.52     0.48
+  </pre>
+    <p>
+      Hasil eksplorasi data menunjukkan bahwa data yang dianalisis terdiri dari 70 
+      observasi kabupaten/kota dengan empat variabel utama, yaitu IPM, Harapan Lama 
+      Sekolah (HLS), pengeluaran per kapita (PPK), dan rasio ketergantungan (RK). 
+      Rata-rata IPM sebesar 72,68 dengan simpangan baku 4,41 menunjukkan adanya 
+      variasi tingkat pembangunan manusia antar wilayah yang cukup moderat. Nilai 
+      IPM berkisar antara 66,11 hingga 83,60, yang mengindikasikan adanya kesenjangan 
+      pembangunan manusia antar kabupaten/kota di Provinsi Jawa Tengah.
+    </p>
+    <p>
+      Rata-rata Harapan Lama Sekolah sebesar 12,95 tahun dengan simpangan baku 0,93 tahun 
+      menunjukkan bahwa secara umum akses pendidikan di Jawa Tengah relatif merata, 
+      meskipun masih terdapat perbedaan antar wilayah. Nilai minimum HLS sebesar 11,46 
+      dan maksimum 15,53 tahun mengindikasikan adanya wilayah dengan peluang pendidikan 
+      yang jauh lebih baik dibandingkan wilayah lainnya.
+    </p>
+    <p>
+      Pengeluaran per kapita memiliki nilai rata-rata sebesar 11.078,71 dengan simpangan 
+      baku 1.756,17, yang menunjukkan variasi tingkat kesejahteraan ekonomi masyarakat 
+      antar kabupaten/kota relatif lebih besar dibandingkan variasi pendidikan. Rentang 
+      nilai yang cukup lebar, yaitu antara 8.461 hingga 15.843, mengindikasikan adanya 
+      ketimpangan kemampuan ekonomi antar wilayah di Jawa Tengah.
+    </p>
+    <h3>Distribusi Boxplot</h3>
     <pre><code class="language-r">
-str(data)
-describe(data)
-saya&lt;-"tidak"
-summary(data)
+      ggplot(data, aes(y = IPM)) + geom_boxplot() + theme_minimal()
     </code></pre>
-    <p>
-      Hasil eksplorasi data menunjukkan adanya variasi IPM yang cukup signifikan
-      antar wilayah. IPM memiliki korelasi positif kuat dengan HLS dan PPK,
-      serta korelasi negatif dengan rasio ketergantungan.
-    </p>
-    <p>
-      Distribusi data relatif wajar dan tidak menunjukkan outlier ekstrem.
-    </p>
   </section>
 
   <section id="metode">
@@ -170,9 +189,9 @@ summary(data)
       variabel respon dan HLS, PPK, serta RK sebagai variabel prediktor.
     </p>
     <p>
-    $$
-    IPM = 31.3663 + 2.5505\left(HLS\right) + 0.0011(PPK) − 0.0861(RK)
-    $$
+      $$
+      IPM = 31.3663 + 2.5505\left(HLS\right) + 0.0011(PPK) − 0.0861(RK)
+      $$
     </p>
   </section>
 
@@ -223,7 +242,7 @@ summary(data)
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 
-<script src="../prism/prism.js"></script>
+<script src="../../prism/prism.js"></script>
 <script src="script_satu.js"></script>
 </body>
 </html>
