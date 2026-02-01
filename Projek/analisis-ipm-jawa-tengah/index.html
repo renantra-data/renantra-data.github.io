@@ -7,11 +7,21 @@
   <meta name="description" content="Analisis pengaruh HLS, PPK, dan Rasio Ketergantungan terhadap IPM Jawa Tengah.">
   <link rel="stylesheet" href="style_satu.css">
 
+
+  <!-- untuk formula -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
   <script id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+  </script>
+
+  <link href="themes/prism.css" rel="stylesheet" />
+  <!-- 
+    Note: You have to escape all < and & characters inside <code> elements (code blocks 
+    and inline snippets) with &lt; and &amp; respectively, or else the browser might 
+    interpret them as an HTML tag or entity. If you have large portions of HTML code, you 
+    can use the Unescaped Markup plugin to work around this.  
+  -->
 
 </head>
 <body>
@@ -38,7 +48,7 @@
   </h1>
 
   <div class="article-meta">
-    <span>2025</span>
+    <span>2025-01-30</span>
   </div>
 
   <nav class="toc">
@@ -57,34 +67,73 @@
   <section id="pendahuluan">
     <h2>Pendahuluan</h2>
     <p>
-      Indeks Pembangunan Manusia (IPM) merupakan indikator komposit yang digunakan
-      untuk menilai keberhasilan pembangunan suatu wilayah dalam meningkatkan
-      kualitas hidup penduduknya. IPM mencakup dimensi kesehatan, pendidikan,
-      dan standar hidup layak.
+      Indeks Pembangunan Manusia (IPM) merupakan indikator komposit yang digunakan untuk 
+      menilai keberhasilan pembangunan suatu wilayah dalam meningkatkan kualitas hidup 
+      penduduknya. IPM mencakup tiga dimensi dasar pembangunan manusia, yaitu kesehatan 
+      yang direpresentasikan oleh umur panjang dan hidup sehat, pendidikan yang 
+      mencerminkan tingkat pengetahuan, serta standar hidup layak yang diukur melalui 
+      kemampuan ekonomi atau pendapatan. Karena sifatnya yang multidimensi, IPM sering 
+      dijadikan tolok ukur utama dalam perumusan dan evaluasi kebijakan pembangunan daerah 
+      guna mendorong pertumbuhan yang inklusif dan berkelanjutan.
     </p>
     <p>
-      Provinsi Jawa Tengah menunjukkan dinamika pembangunan manusia yang menarik,
-      dengan peningkatan IPM namun masih terdapat disparitas antar kabupaten/kota.
-      Oleh karena itu, analisis faktor-faktor yang memengaruhi IPM menjadi penting.
+      Provinsi Jawa Tengah, sebagai salah satu provinsi dengan jumlah penduduk terbesar di 
+      Indonesia, menunjukkan dinamika pembangunan manusia yang menarik untuk dikaji. 
+      Meskipun secara agregat nilai IPM Jawa Tengah mengalami peningkatan dalam beberapa 
+      tahun terakhir, masih terdapat disparitas capaian IPM antar kabupaten/kota. Kondisi 
+      ini mengindikasikan bahwa peningkatan IPM tidak hanya dipengaruhi oleh pertumbuhan 
+      ekonomi semata, tetapi juga oleh berbagai faktor sosial dan demografis yang berperan 
+      secara simultan. Oleh karena itu, identifikasi faktor-faktor yang memengaruhi IPM 
+      menjadi penting sebagai dasar perumusan kebijakan pembangunan yang lebih tepat 
+      sasaran.
+    </p>
+
+    <p>
+      Beberapa variabel yang secara teoritis dan empiris diyakini memiliki pengaruh signifikan 
+      terhadap IPM antara lain harapan lama sekolah, pengeluaran per kapita, dan rasio 
+      ketergantungan. Harapan lama sekolah mencerminkan peluang dan akses masyarakat 
+      terhadap pendidikan formal, yang pada akhirnya berkontribusi pada peningkatan 
+      kualitas sumber daya manusia. Pengeluaran per kapita menggambarkan tingkat 
+      kesejahteraan ekonomi masyarakat serta kemampuan dalam memenuhi kebutuhan dasar, 
+      termasuk pendidikan dan kesehatan. Sementara itu, rasio ketergantungan menunjukkan 
+      beban penduduk usia tidak produktif yang harus ditanggung oleh penduduk usia 
+      produktif, yang dapat memengaruhi kapasitas ekonomi dan sosial suatu wilayah.
+    </p>
+    <p>
+      Berdasarkan latar belakang tersebut, penelitian ini bertujuan untuk menganalisis 
+      pengaruh harapan lama sekolah, pengeluaran per kapita, dan rasio ketergantungan 
+      terhadap Indeks Pembangunan Manusia di Provinsi Jawa Tengah menggunakan data 
+      kabupaten/kota tahun 2020–2021. Hasil penelitian ini diharapkan dapat memberikan 
+      gambaran empiris mengenai faktor-faktor penentu IPM serta menjadi bahan pertimbangan 
+      dalam perencanaan dan evaluasi kebijakan pembangunan manusia di tingkat daerah.
     </p>
   </section>
 
   <section id="data">
     <h2>Deskripsi dan Sumber Data</h2>
     <p>
-      Data yang digunakan merupakan data sekunder dari Badan Pusat Statistik (BPS)
-      Provinsi Jawa Tengah tahun 2020–2021 pada tingkat kabupaten/kota.
+      Data yang digunakan dalam penelitian ini merupakan data sekunder yang bersumber dari 
+      Badan Pusat Statistik (BPS) Provinsi Jawa Tengah. Variabel yang dianalisis meliputi 
+      Indeks Pembangunan Manusia (IPM) sebagai variabel respon, serta Harapan Lama Sekolah 
+      (HLS), pengeluaran per kapita, dan rasio ketergantungan sebagai variabel penjelas. 
+      Data disusun pada tingkat kabupaten/kota dan mencakup seluruh wilayah administrasi 
+      di Provinsi Jawa Tengah.
     </p>
-    <ul>
-      <li>IPM (Indeks Pembangunan Manusia)</li>
-      <li>HLS (Harapan Lama Sekolah)</li>
-      <li>PPK (Pengeluaran Per Kapita)</li>
-      <li>RK (Rasio Ketergantungan)</li>
-    </ul>
+    <p>
+      Periode pengamatan dalam penelitian ini adalah tahun 2020-2021. Seluruh data diperoleh 
+      dari publikasi resmi BPS melalui laman jateng.bps.go.id dan diolah lebih lanjut untuk 
+      keperluan analisis statistik..
+    </p>
   </section>
 
   <section id="eda">
     <h2>Exploratory Data Analysis</h2>
+    <h3>Deskripsi Data</h3>
+    <pre><code class="language-r">
+      str(data)
+      describe(data)
+      saya&lt;-"tidak"
+    </code></pre>
     <p>
       Hasil eksplorasi data menunjukkan adanya variasi IPM yang cukup signifikan
       antar wilayah. IPM memiliki korelasi positif kuat dengan HLS dan PPK,
@@ -155,6 +204,7 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 
+<script src="prism.js"></script>
 <script src="script_satu.js"></script>
 </body>
 </html>
