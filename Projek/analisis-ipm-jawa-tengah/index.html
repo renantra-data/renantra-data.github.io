@@ -37,6 +37,8 @@
     can use the Unescaped Markup plugin to work around this.  
     (2)
     img make div dan class gambar biar styling otomatis sesuai css
+    (3)
+    inline make \( ... \) di mathcjax v3, bukan make $ .... $ kaya md
     -->
     <header class="site-header">
         <div class="container">
@@ -72,7 +74,7 @@
       <li><a href="#metode">Metode Analisis</a></li>
       <li><a href="#hasil">Hasil dan Pembahasan</a></li>
       <li><a href="#kesimpulan">Kesimpulan</a></li>
-      <li><a href="#referensi">Referensi</a></li>
+      <li><a href="#sumber_data">Sumber Data</a></li>
     </ul>
   </nav>
 
@@ -133,8 +135,8 @@
     </p>
     <p>
       Periode pengamatan dalam penelitian ini adalah tahun 2020-2021. Seluruh data diperoleh 
-      dari publikasi resmi BPS melalui laman jateng.bps.go.id dan diolah lebih lanjut untuk 
-      keperluan analisis statistik..
+      dari publikasi resmi BPS melalui laman <a href="https://jateng.bps.go.id/id" target="_blank" rel="noopener">jateng.bps.go.id</a> dan diolah lebih lanjut untuk 
+      keperluan analisis statistik.
     </p>
   </section>
 
@@ -313,24 +315,230 @@
     </p>
     <ul>
       <li>\(H_0\): Data berdistribusi normal.</li>
+      <li>\(H_1\): Data tidak berdistribusi normal.</li>
+    </ul>
+    <pre><code class="language-r">
+      shapiro.test(residuals(model))
+    </code></pre>
+    <p>Output:</p>
+    <pre>
+        Shapiro-Wilk normality test
+
+      data:  residuals(model)
+      W = 0.9665, p-value = 0.05779
+    </pre>
+    <pre><code class="language-r">
+      qqnorm(residuals(model))
+      qqline(residuals(model), col = "red")
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/normalitas_qqplot.png" alt="QQ Plot Residuals">
+    </div>
+    <p>
+      Berdasarkan hasil uji Shapiro-Wilk, diperoleh nilai p-value sebesar 0,05779 yang 
+      lebih besar dari taraf signifikansi 0,05, sehingga hipotesis nol gagal ditolak. 
+      Dengan demikian, dapat disimpulkan bahwa residual model berdistribusi normal. 
+      Kesimpulan ini juga didukung oleh grafik Q-Q plot yang menunjukkan sebaran 
+      residual mengikuti garis diagonal.
+    </p>
+    <h3>Asumsi Linieritas</h3>
+    <p>
+      Uji linearitas dilakukan untuk memeriksa apakah hubungan antara variabel independen 
+      dan variabel dependen bersifat linear, yaitu setiap perubahan pada variabel 
+      independen akan memengaruhi variabel dependen secara proporsional. Visualisasi 
+      scatter plot dengan garis regresi linear digunakan untuk mengevaluasi linearitas ini.
+    </p>
+    <pre><code class="language-r">
+      ggplot(data, aes(x = HLS, y = IPM)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = TRUE) +
+      labs(
+        x = "Harapan Lama Sekolah (HLS)",
+        y = "Indeks Pembangunan Manusia (IPM)",
+        title = "Scatter Plot HLS terhadap IPM"
+      )
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/scatter_hls_ipm.png" alt="scatter HLS terhadap IPM">
+    </div>
+    <pre><code class="language-r">
+      ggplot(data, aes(x = PPK, y = IPM)) +
+        geom_point() +
+        geom_smooth(method = "lm", se = TRUE) +
+        labs(
+          x = "Pengeluaran per Kapita (PPK)",
+          y = "Indeks Pembangunan Manusia (IPM)",
+          title = "Scatter Plot PPK terhadap IPM"
+        )
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/scatter_ppk_ipm.png" alt="scatter PPK terhadap IPM">
+    </div>
+    <pre><code class="language-r">
+      ggplot(data, aes(x = RK, y = IPM)) +
+        geom_point() +
+        geom_smooth(method = "lm", se = TRUE) +
+        labs(
+          x = "Rasio Ketergantungan (RK)",
+          y = "Indeks Pembangunan Manusia (IPM)",
+          title = "Scatter Plot Rk terhadap IPM"
+        )
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/scatter_rk_ipm.png" alt="scatter RK terhadap IPM">
+    </div>
+    <p>
+      Berdasarkan scatter plot dengan garis regresi linear, terlihat bahwa hubungan 
+      antara setiap variabel independen (HLS, PPK, dan RK) dengan variabel dependen (IPM) 
+      menunjukkan pola linear. Dengan demikian, dapat disimpulkan bahwa asumsi linearitas 
+      terpenuhi.
+    </p>
+    <h3>Asumsi Autokorelasi</h3>
+    <p>
+      Uji autokorelasi digunakan untuk memeriksa apakah residual dari satu pengamatan 
+      berkorelasi dengan residual pengamatan lain. Dalam model regresi, salah satu asumsi 
+      yang harus dipenuhi adalah tidak terjadi autokorelasi.
+    </p>
+    <p>Hipotesis:</p>
+    <ul>
+      <li>\(H_0\): Tidak terjadi autokorelasi.</li>
+      <li>\(H_1\): Terjadi autokorelasi.</li>
+    </ul>
+    <pre><code class="language-r">
+      dwtest(model)
+    </code></pre>
+    <p>Output:</p>
+    <pre>
+        Durbin-Watson test
+
+      data:  model
+      DW = 1.5015, p-value = 0.01551
+      alternative hypothesis: true autocorrelation is greater than 0
+    </pre>
+    <p>
+      Berdasarkan hasil uji, diperoleh p-value < 0,05, sehingga H0 ditolak. Hal ini 
+      menunjukkan adanya autokorelasi pada data. Kemungkinan penyebabnya adalah karena 
+      data bersifat time series, sehingga beberapa pengamatan memiliki hubungan dengan 
+      periode sebelumnya.
+    </p>
+    <h3>Asumsi Multikolinieritas</h3>
+    <p>
+      Uji multikolinearitas bertujuan untuk memeriksa apakah terdapat korelasi tinggi 
+      antar variabel independen dalam model regresi. Model regresi yang baik seharusnya 
+      tidak mengalami multikolinearitas.
+    </p>
+    <p>Hipotesis:</p>
+    <ul>
+      <li>\(H_0\): Tidak terjadi multikolinearitas.</li>
+      <li>\(H_1\): Terjadi multikolinearitas.</li>
+    </ul>
+    <pre><code class="language-r">
+      vif(model)
+    </code></pre>
+    <p>Output:</p>
+    <pre>
+      HLS       PPK       RK 
+      2.667495  2.825933  1.527159
+    </pre>
+    <p>
+      Berdasarkan hasil perhitungan, semua nilai VIF &lt 10, sehingga dapat disimpulkan 
+      bahwa tidak terjadi multikolinearitas antar variabel independen dalam model regresi.
+    </p>
+    <h3>Asumsi Homoskedastisitas</h3>
+    <p>
+      Uji homoskedastisitas adalah uji untuk mengetahui apakah variansi residual di seluruh 
+      pengamatan memiliki nilai yang konstan.
+    </p>
+    <p>Hipotesis:</p>
+    <ul>
+      <li>\(H_0\): Variansi residual konstan (homoskedastisitas terpenuhi).</li>
+      <li>\(H_1\): Variansi residual tidak konstan (homoskedastisitas tidak terpenuhi).</li>
+    </ul>
+    <pre><code class="language-r">
+      plot(model$fitted.values, resid(model),
+          xlab = "Nilai Fitted",
+          ylab = "Residual",
+          main = "Plot Residual vs Fitted")
+      abline(h = 0, col = "red")
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/residual_vs_fitted.png" alt="plot residual vs fitted">
+    </div>
+    <pre><code class="language-r">
+      bptest(model)
+    </code></pre>
+    <p>Output:</p>
+    <pre>
+        studentized Breusch-Pagan test
+
+      data:  model
+      BP = 1.0292, df = 3, p-value = 0.7942
+    </pre>
+    <p>
+      Berdasarkan plot residual, terlihat penyebaran residual relatif konstan, dan hasil uji 
+      Breusch-Pagan menunjukkan p-value > 0,05, sehingga H0 gagal ditolak. Dengan demikian, 
+      dapat disimpulkan bahwa tidak ada gejala heteroskedastisitas, atau data memenuhi 
+      asumsi homoskedastisitas.
+    </p>
+    <h3>Interpretasi Koefisien</h3>
+    <p>
+      $$
+      IPM=31.3663+2.5505(HLS)+0.0011(PPK)-0.0861(RK)
+      $$
+    </p>
+    <ul>
+      <li>
+        Harapan Lama Sekolah (HLS): Setiap kenaikan 1 tahun HLS meningkatkan IPM sebesar 
+        2,5505 poin.
+      </li>
+      <li>
+        Pengeluaran per Kapita (PPK): Setiap peningkatan 1 satuan PPK menaikkan IPM sebesar 
+        0,0011 poin.
+      </li>
+      <li>
+        Rasio Ketergantungan (RK): Setiap kenaikan 1 poin RK menurunkan IPM sebesar 
+        0,0861 poin.
+      </li>
+      <li>
+        intersep (31,3663): Nilai IPM yang diperkirakan ketika seluruh variabel 
+        independen bernilai nol.
+      </li>
     </ul>
   </section>
+  
 
   <section id="kesimpulan">
     <h2>Kesimpulan</h2>
     <p>
-      Peningkatan pendidikan dan kesejahteraan ekonomi berkontribusi positif
-      terhadap peningkatan IPM di Jawa Tengah. Sebaliknya, tingginya rasio
-      ketergantungan dapat menurunkan capaian IPM.
+      Berdasarkan penelitian mengenai pengaruh Harapan Lama Sekolah (HLS), Pengeluaran 
+      per Kapita (PPK), dan Rasio Ketergantungan (RK) terhadap Indeks Pembangunan Manusia 
+      (IPM) pada kabupaten/kota di Provinsi Jawa Tengah tahun 2020-2021, dapat disimpulkan 
+      bahwa data yang digunakan memenuhi sebagian besar asumsi regresi linear, meskipun 
+      autokorelasi masih terdeteksi kemungkinan akibat sifat data runtun waktu tahunan. 
+      Hasil model regresi menunjukkan bahwa HLS dan PPK berpengaruh positif terhadap IPM, 
+      sehingga peningkatan HLS atau PPK akan meningkatkan IPM, sedangkan RK berpengaruh 
+      negatif terhadap IPM, artinya peningkatan RK akan menurunkan IPM. Secara 
+      keseluruhan, model regresi linear berganda yang dibangun valid dan dapat 
+      digunakan untuk menganalisis pengaruh ketiga variabel tersebut terhadap IPM, 
+      dengan catatan autokorelasi perlu diperhatikan dalam interpretasi hasil.
     </p>
   </section>
 
-  <section id="referensi">
-    <h2>Referensi</h2>
+  <section id="sumber_data">
+    <h2>Sumber Data</h2>
     <ul>
-      <li>BPS Provinsi Jawa Tengah</li>
-      <li>Linear Regression Assumptions and Diagnostics using R</li>
-      <li>Studi IPM Jawa Timur & Jawa Tengah</li>
+      <li>
+        <a href="https://jateng.bps.go.id/id/statistics-table/2/ODMjMg==/-metode-baru-indeks-pembangunan-manusia-menurut-kabupaten-kota.html" 
+        target="_blank" rel="noopener">
+          Data Komponen IPM Jateng
+        </a>
+      </li>
+      <li>
+        <a href="https://jateng.bps.go.id/id/statistics-table/2/ODYzIzI=/-proyeksi-supas-2015-rasio-ketergantungan.html" 
+        target="_blank" rel="noopener">
+          Data Rasio Ketergantungan Jawa Tengah
+        </a>
+      </li>
     </ul>
   </section>
 
