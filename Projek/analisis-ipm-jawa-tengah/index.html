@@ -194,34 +194,126 @@
       <img src="assets/boxplot_ipm.png" alt="Boxplot IPM">
     </div>
     <pre><code class="language-r">
-      ggplot(data, aes(y = IPM)) + geom_boxplot() + theme_minimal()
+      ggplot(data, aes(y = HLS)) + geom_boxplot() + theme_minimal()
     </code></pre>
     <div class="gambar">
-      <img src="assets/boxplot_ipm.png" alt="Boxplot IPM">
+      <img src="assets/boxplot_hls.png" alt="Boxplot HLS">
     </div>
+    <pre><code class="language-r">
+      ggplot(data, aes(y = PPK)) + geom_boxplot() + theme_minimal()
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/boxplot_ppk.png" alt="Boxplot PPK">
+    </div>
+    <pre><code class="language-r">
+      ggplot(data, aes(y = RK)) + geom_boxplot() + theme_minimal()
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/boxplot_rk.png" alt="Boxplot PPK">
+    </div>
+    <p>
+      Berdasarkan boxplot, seluruh variabel menunjukkan penyebaran data yang relatif 
+      wajar tanpa indikasi outlierekstrem yang dominan. Distribusi IPM, HLS, dan PPK 
+      cenderung miring ke kanan (skewness positif), yang mengindikasikan bahwa sebagian 
+      besar wilayah memiliki nilai di bawah rata-rata dengan beberapa wilayah yang 
+      memiliki capaian relatif tinggi. Sebaliknya, rasio ketergantungan menunjukkan 
+      kemencengan negatif yang ringan, menandakan adanya beberapa wilayah dengan rasio 
+      ketergantungan relatif rendah.
+    </p>
+    <h3>Korelasi</h3>
+    <pre><code class="language-r">
+      cor_matrix &lt- cor(data[, c("IPM", "HLS", "PPK", "RK")])
+      cor_matrix
+    </code></pre>
+    <p>Output:</p>
+    <pre>
+            IPM         HLS         PPK         RK
+      IPM   1.0000000   0.9267527   0.9078739   -0.6184243
+      HLS   0.9267527   1.0000000   0.7834712   -0.5342341
+      PPK   0.9078739   0.7834712   1.0000000   -0.5705000
+      RK    -0.6184243  -0.5342341  -0.5705000  1.0000000
+    </pre>
+    <pre><code class="language-r">
+      corrplot(
+        cor_matrix,
+        method = "number"
+      )
+    </code></pre>
+    <div class="gambar">
+      <img src="assets/korelasi.png" alt="Plot Korelasi">
+    </div>
+    <p>
+      Hasil analisis korelasi menunjukkan adanya hubungan yang kuat antara IPM 
+      dengan Harapan Lama Sekolah (r = 0,927) dan antara IPM dengan pengeluaran 
+      per kapita (r = 0,908). Hal ini mengindikasikan bahwa wilayah dengan akses 
+      pendidikan yang lebih baik serta tingkat kesejahteraan ekonomi yang lebih 
+      tinggi cenderung memiliki nilai IPM yang lebih tinggi.
+    </p>
+    <p>
+      Sebaliknya, rasio ketergantungan memiliki korelasi negatif sedang dengan IPM 
+      (r = -0,618), yang menunjukkan bahwa semakin tinggi beban penduduk usia tidak 
+      produktif, semakin rendah tingkat pembangunan manusia suatu wilayah. Korelasi 
+      negatif ini sejalan dengan teori demografi yang menyatakan bahwa tingginya 
+      rasio ketergantungan dapat menghambat kapasitas ekonomi dan sosial daerah.
+    </p>
   </section>
 
   <section id="metode">
     <h2>Metode Analisis</h2>
     <p>
-      Metode yang digunakan adalah regresi linear berganda dengan IPM sebagai
-      variabel respon dan HLS, PPK, serta RK sebagai variabel prediktor.
+      Model regresi linear berganda dibangun untuk memprediksi Indeks Pembangunan 
+      Manusia (IPM) menggunakan Harapan Lama Sekolah (HLS), Pengeluaran per Kapita 
+      (PPK), dan Rasio Ketergantungan (RK) sebagai variabel prediktor. Koefisien 
+      model dievaluasi untuk signifikansi, dan asumsi klasik regresi (normalitas, 
+      linearitas, autokorelasi, multikolinearitas, dan homoskedastisitas) diuji 
+      untuk memastikan validitas model.
     </p>
-    $$
-    IPM = 31.3663 + 2.5505\left(HLS\right) + 0.0011(PPK) − 0.0861(RK)
-    $$
   </section>
 
   <section id="hasil">
     <h2>Hasil dan Pembahasan</h2>
     <p>
-      Hasil pemodelan menunjukkan bahwa HLS dan PPK berpengaruh positif signifikan
-      terhadap IPM, sedangkan RK berpengaruh negatif.
+      Analisis data dilakukan menggunakan perangkat lunak R dengan beberapa paket 
+      pendukung, yaitu readxl untuk membaca data, ggplot2 untuk visualisasi, lmtest 
+      untuk pengujian asumsi klasik, car untuk uji multikolinearitas, psych untuk 
+      statistik deskriptif, dan corrplot untuk analisis korelasi antar variabel.
+    </p>
+    <pre><code class="language-r">
+      library(readxl)
+      library(ggplot2)
+      library(lmtest)
+      library(car)
+      library(psych)
+      library(corrplot)
+    </code></pre>
+    <pre><code class="language-r">
+      data_awal &lt- read_excel(file.choose())
+      data &lt- data_awal[, c("IPM", "HLS", "PPK", "RK")]
+    </code></pre>
+    <pre><code class="language-r">
+      model &lt- lm(IPM ~ HLS +PPK + RK , data = data)
+    </code></pre>
+    <p>
+      Pemodelan dilakukan menggunakan regresi linear berganda dengan Indeks 
+      Pembangunan Manusia (IPM) sebagai variabel respon serta Harapan Lama Sekolah 
+      (HLS), pengeluaran per kapita (PPK), dan rasio ketergantungan (RK) sebagai 
+      variabel prediktor. Hasil estimasi menunjukkan bahwa seluruh parameter model 
+      signifikan pada taraf signifikansi 5 persen. Model regresi yang diperoleh 
+      dinyatakan sebagai berikut:
     </p>
     <p>
-      Seluruh asumsi regresi terpenuhi kecuali autokorelasi, yang kemungkinan
-      disebabkan oleh sifat data runtun waktu tahunan.
+      $$
+      IPM=31.3663+2.5505(HLS)+0.0011(PPK)-0.0861(RK)
+      $$
     </p>
+    <h3>Asumsi Nomralitas</h3>
+    <p>
+      Uji normalitas adalah uji untuk menentukan apakah residual berdistribusi normal 
+      atau tidak.
+    </p>
+    <ul>
+      <li>\(H_0\): Data berdistribusi normal.</li>
+    </ul>
   </section>
 
   <section id="kesimpulan">
